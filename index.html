@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo"><span>+</span> MediCare</div>
+        <ul class="nav-links">
+            <li class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">Dashboard</li>
+            <li class="nav-item" id="nav-patients" onclick="switchView('patients')">Patients</li>
+            <li class="nav-item" id="nav-doctors" onclick="switchView('doctors')">Doctors</li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div id="view-dashboard" class="content-view">
+            <div class="header">
+                <h1>Dashboard</h1>
+                <button class="btn btn-primary" onclick="openCreateModal()">+ Appointment</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card"><span class="stat-label">Appointments</span><span class="stat-value" id="total-appts">0</span></div>
+                <div class="stat-card"><span class="stat-label">Patients</span><span class="stat-value" id="total-patients">0</span></div>
+                <div class="stat-card"><span class="stat-label">Doctors</span><span class="stat-value" id="total-doctors">0</span></div>
+            </div>
+            <div class="table-container">
+                <div class="table-header"><h3>Schedule</h3></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appt-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="view-patients" class="content-view" style="display:none">
+            <div class="header">
+                <h1>Patients</h1>
+                <button class="btn btn-primary" onclick="openPatientModal()">+ Patient</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th><th>Info</th><th>History</th><th>Emergency</th><th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="patient-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="view-doctors" class="content-view" style="display:none">
+            <div class="header">
+                <h1>Doctors</h1>
+                <button class="btn btn-primary" onclick="openDoctorModal()">+ Doctor</button>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th><th>Profession</th><th>Room</th><th>Shift</th><th>Salary</th><th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="doctor-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <h2 id="appt-modal-title">New Appointment</h2>
+            <form id="appointment-form">
+                <input type="hidden" name="id"> <!-- Hidden ID -->
+                <div class="form-group"><label>Patient</label><select name="patient_id" id="patient-select" class="form-control" required></select></div>
+                <div class="form-group"><label>Doctor</label><select name="doctor_id" id="doctor-select" class="form-control" required></select></div>
+                <div class="form-group"><label>Date</label><input type="date" name="date" class="form-control" required></div>
+                <div class="form-group"><label>Time</label><input type="time" name="time" class="form-control" required></div>
+                <div class="form-group"><label>Status</label><select name="status" class="form-control"><option>Scheduled</option><option>Completed</option></select></div>
+                <div class="modal-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('modal-overlay')">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="patient-modal-overlay">
+        <div class="modal">
+            <h2 id="patient-modal-title">New Patient</h2>
+            <form id="patient-form">
+                <input type="hidden" name="id"> <!-- Hidden ID -->
+                <div class="form-group"><label>Name</label><input type="text" name="fname" class="form-control" required></div>
+                <div class="form-group"><label>Birth Date</label><input type="date" name="birth_date" class="form-control" required></div>
+                <div class="form-group"><label>Phone</label><input type="text" name="phone" class="form-control"></div>
+                <div class="form-group"><label>Email</label><input type="email" name="email" class="form-control"></div>
+                <div class="form-group"><label>Address</label><input type="text" name="address" class="form-control"></div>
+                <div class="form-group"><label>History</label><textarea name="med_history" class="form-control"></textarea></div>
+                <div class="form-group"><label>Allergies</label><input type="text" name="allergies" class="form-control"></div>
+                <div class="form-group"><label>Emergency</label><input type="text" name="emrg_contact" class="form-control"></div>
+                <div class="modal-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('patient-modal-overlay')">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="doctor-modal-overlay">
+        <div class="modal">
+            <h2 id="doctor-modal-title">New Doctor</h2>
+            <form id="doctor-form">
+                <input type="hidden" name="id"> <!-- Hidden ID -->
+                <div class="form-group"><label>Name</label><input type="text" name="fname" class="form-control" required></div>
+                <div class="form-group"><label>Birth Date</label><input type="date" name="birth_date" class="form-control" required></div>
+                <div class="form-group"><label>Phone</label><input type="text" name="phone" class="form-control"></div>
+                <div class="form-group"><label>Email</label><input type="email" name="email" class="form-control"></div>
+                <div class="form-group"><label>Address</label><input type="text" name="address" class="form-control"></div>
+                <div class="form-group"><label>Profession</label><input type="text" name="profession" class="form-control" required></div>
+                <div class="form-group"><label>Room No</label><input type="text" name="room_no" class="form-control"></div>
+                <div class="form-group"><label>Hired Date</label><input type="date" name="hiring_date" class="form-control" required></div>
+                <div class="form-group"><label>Salary</label><input type="number" name="salary" class="form-control" required></div>
+                <div class="form-group"><label>Shift</label><select name="shift_type" class="form-control"><option>Day</option><option>Night</option></select></div>
+                <div class="modal-actions"><button type="button" class="btn btn-secondary" onclick="closeModal('doctor-modal-overlay')">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
