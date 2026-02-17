@@ -1,64 +1,71 @@
-# Hospital Management System
+# MediCare - Hospital Appointment Management System
 
-A mini full-stack hospital management system built to demonstrate core web engineering principles such as relational database modeling, REST-style backend APIs, and dynamic frontend behavior using vanilla technologies.
+MediCare is a modern, lightweight, and secure Hospital Management System designed to streamline patient scheduling and doctor management. Built with a modular PHP backend and a responsive vanilla JavaScript frontend.
 
-## Tech Stack
+![MediCare Dashboard Mockup](https://raw.githubusercontent.com/zer0dayf/hospital_appointment_management_sys/main/preview.png)
 
-Frontend: HTML5, CSS3, Vanilla JavaScript (ES6+)  
-Backend: PHP  
-Database: MySQL  
-Communication: REST-style API (JSON over HTTP), Fetch API
+## 🚀 Key Features
 
-## Project Description
+- **Modular Architecture**: Refactored using an MVC-inspired controller pattern for maintainability.
+- **Enhanced Security**: Server-side input validation and sanitization to prevent XSS and injection attacks.
+- **Modern UI/UX**:
+  - ✨ **Dark Mode**: Native support with persistent theme selection.
+  - 🔍 **Real-time Search**: Instant filtering for appointments, patients, and doctors.
+- **RESTful API**: Clean API endpoints for CRUD operations.
+- **PostgreSQL Support**: Optimized for high-performance data management with indexed queries.
 
-This project simulates a simplified hospital management system with a strong emphasis on clean architecture and data modeling rather than feature completeness. It demonstrates how a frontend application communicates with a backend API and a relational database in a structured and maintainable way, without relying on modern JavaScript frameworks.
+## 🛠️ Tech Stack
 
-The primary objective of the project is to showcase full-stack development fundamentals that are directly applicable to real-world systems.
+- **Frontend**: HTML5, CSS3 (Modern Flex/Grid), Vanilla JavaScript (ES6+).
+- **Backend**: PHP 8.x (Controller pattern).
+- **Database**: PostgreSQL 17+.
+- **Server**: Compatible with Apache, Nginx, or PHP's built-in server.
 
-## System Architecture
+## 📦 Installation
 
-The application follows a classic three-layer architecture. The client-side interface runs in the browser and handles user interactions and UI updates. All data operations are performed through a PHP-based backend API, which communicates with a MySQL database using a normalized relational schema. Data exchange between the frontend and backend is handled asynchronously via JSON.
+### 1. Clone the repository
+```bash
+git clone https://github.com/zer0dayf/hospital_appointment_management_sys.git
+cd hospital_appointment_management_sys
+```
 
-## Database Design
+### 2. Database Setup
+Ensure PostgreSQL is running, then create the database and import the schema:
+```bash
+createdb hospital_db
+psql -d hospital_db -f database.sql
+```
 
-The database is designed using an inheritance-based relational model to reduce data duplication and accurately represent real-world entities.
+### 3. Configuration
+Update your database credentials in `db_connect.php`:
+```php
+$host = 'localhost';
+$dbname = 'hospital_db';
+$username = 'your_username';
+$password = 'your_password';
+```
 
-Entity hierarchy:
-Person (base entity)  
-→ Patient  
-→ Employee  
-→ Doctor (extends Employee)
+### 4. Run the Application
+You can use the built-in PHP server for testing:
+```bash
+php -S localhost:8000
+```
+Then visit `http://localhost:8000` in your browser.
 
-Shared attributes are stored in the Person table, while specialized entities extend the base entity through foreign keys. Referential integrity is enforced using constraints and cascading rules. This approach improves scalability, maintainability, and data consistency compared to flat table designs.
+## 📂 Project Structure
 
-## Core Features
+```text
+├── api.php           # Main router for API requests
+├── app.js            # Frontend logic and state management
+├── controllers/      # Modular business logic (Patient, Doctor, Appointment)
+├── database.sql      # PostgreSQL schema and seeding script
+├── db_connect.php    # Database connection logic
+├── index.html        # Main dashboard UI
+└── style.css         # Modern styling and theme variables
+```
 
-- Dashboard displaying basic system statistics  
-- Patient management (add, list, delete)  
-- Doctor management  
-- Dynamic UI updates without page reloads  
-- Modal-based user interactions  
-- Asynchronous frontend–backend communication via API calls  
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Running the Project Locally
-
-Requirements: PHP 8+, MySQL, and a local server environment such as XAMPP, WAMP, or MAMP.
-
-Steps:
-1. Clone the repository to your local machine.
-2. Create a MySQL database and import the provided database.sql file.
-3. Configure database credentials in the PHP connection file.
-4. Place the project inside the server root directory and start Apache and MySQL.
-5. Access the application via http://localhost/project-folder/
-
-## Known Limitations
-
-The project does not include authentication or authorization mechanisms, input validation or sanitization layers, pagination for large datasets, or API versioning. These limitations were intentionally accepted to keep the project focused on architectural fundamentals.
-
-## Possible Improvements
-
-Future enhancements could include adding authentication and role-based access control, implementing centralized input validation and error handling, modularizing frontend JavaScript files, improving API compliance with REST standards, and introducing automated tests.
-
-## Notes
-
-This project was developed as a portfolio-oriented full-stack exercise to demonstrate practical understanding of web application architecture, relational database design, and frontend–backend interaction.
+---
+Developed with ❤️ by [zer0dayf](https://github.com/zer0dayf)

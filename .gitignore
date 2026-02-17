@@ -1,0 +1,18 @@
+# PHP
+composer.lock
+vendor/
+
+# Database
+.env
+db_config_local.php
+
+# Debug & Temp
+debug-server.js
+debug_db.php
+test_debug.php
+*.log
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/

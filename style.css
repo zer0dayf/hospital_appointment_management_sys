@@ -16,6 +16,17 @@
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+[data-theme="dark"] {
+    --bg-color: #111827;
+    --card-bg: #1f2937;
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-color: #374151;
+    --sidebar-bg: #111827;
+    --sidebar-text: #f3f4f6;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -39,6 +50,28 @@ body {
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-theme {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    border: none;
+    background: rgba(255,255,255,0.05);
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-theme:hover {
+    background: rgba(255,255,255,0.1);
 }
 
 .logo {
@@ -146,6 +179,18 @@ body {
 .table-header {
     padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box input {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    width: 250px;
 }
 
 table {
@@ -161,7 +206,7 @@ td {
 }
 
 th {
-    background-color: #f9fafb;
+    background-color: rgba(0,0,0,0.02);
     font-weight: 600;
     font-size: 0.75rem;
     text-transform: uppercase;
