@@ -1,10 +1,12 @@
 <?php
 // PostgreSQL Connection
-$host = 'localhost';
-$port = '5432';
-$dbname = 'hospital_db';
-$username = 'postgres'; // Default PostgreSQL user
-$password = '123456'; // Replace with your actual password
+$env = file_exists(__DIR__ . '/.env') ? parse_ini_file(__DIR__ . '/.env') : [];
+
+$host = $env['DB_HOST'] ?? 'localhost';
+$port = $env['DB_PORT'] ?? '5432';
+$dbname = $env['DB_NAME'] ?? 'hospital_db';
+$username = $env['DB_USER'] ?? 'postgres'; // Default PostgreSQL user
+$password = $env['DB_PASS'] ?? ''; // Load from .env
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
